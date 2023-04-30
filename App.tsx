@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import {Alert, Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import * as Notifications from 'expo-notifications';
-import {useCallback, useEffect} from "react";
+import {useCallback} from "react";
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -12,9 +12,10 @@ Notifications.setNotificationHandler({
 export default function App() {
   const askPermission = useCallback(async () => {
     try {
-      const x = await Notifications.getPermissionsAsync();
-      const y = await Notifications.getDevicePushTokenAsync();
-      console.log(x,y, 'here')
+      // const x = await Notifications.getPermissionsAsync();
+      // const y = await Notifications.getDevicePushTokenAsync();
+      await Notifications.requestPermissionsAsync();
+      // console.log(x,y, 'here')
     } catch (e) {
       console.log(e, 'inside error')
     }

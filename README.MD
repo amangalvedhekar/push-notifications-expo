@@ -2,3 +2,4 @@
 `npx create-expo-app --template`
 `npx expo prebuild`
 `npx expo install expo-notifications`
+`eas build:configure`
