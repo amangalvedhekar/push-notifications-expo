@@ -1,10 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import {Alert, Button, StyleSheet, Text, View} from 'react-native';
+import * as Notifications from 'expo-notifications';
+import {useCallback, useEffect} from "react";
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 export default function App() {
+  const askPermission = useCallback(async () => {
+    try {
+      const x = await Notifications.getPermissionsAsync();
+      const y = await Notifications.getDevicePushTokenAsync();
+      console.log(x,y, 'here')
+    } catch (e) {
+      console.log(e, 'inside error')
+    }
+  }, []);
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>first step</Text>
+      <Button title='Ask Permission' onPress={askPermission} />
       <StatusBar style="auto" />
     </View>
   );
